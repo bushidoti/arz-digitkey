@@ -10,7 +10,6 @@ const InstallPWA = () => {
   useEffect(() => {
     const handler = e => {
       e.preventDefault();
-      console.log("we are being triggered :D");
       setSupportsPWA(true);
       setPromptInstall(e);
     };
@@ -33,20 +32,6 @@ const InstallPWA = () => {
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
        setInstalled(true)
-    }
-
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js", { scope: "/" })
-        .then((registration) => {
-          // registration worked
-          console.log("Registration succeeded.");
-          registration.update();
-        })
-        .catch((error) => {
-          // registration failed
-          console.error(`Registration failed with ${error}`);
-        });
     }
 
   return (
