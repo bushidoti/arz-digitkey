@@ -6,7 +6,6 @@ import {Home} from "../home/home";
 
 
 export const RouteLayout = () => {
-
     return (
          <Routes>
                 <Route path={'/currency'} element={<Currency/>}/>

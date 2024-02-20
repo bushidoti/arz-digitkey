@@ -95,14 +95,14 @@ const CashIcon = (props: Partial<CustomIconComponentProps>) => (
 export const MenuLayout = () => {
 
     const items: MenuItem[] = [
-        getItem(<Link to='/currency'><CashIcon/></Link>, '1'),
-        getItem(<Link to='/'><HomeIcon/></Link>, '2'),
-        getItem(<Link to='/metal'><GoldIcon/></Link>, '3'),
+        getItem(<Link to='/currency'><CashIcon/></Link>, '/currency'),
+        getItem(<Link to='/'><HomeIcon/></Link>, '/'),
+        getItem(<Link to='/metal'><GoldIcon/></Link>, '/metal'),
     ];
     return (
         <Menu
             theme={"dark"}
-            defaultSelectedKeys={['2']}
+            defaultSelectedKeys={[window.location.pathname]}
             className='bottom-0 fixed w-full justify-center rounded-t-[50px] gap-1 p-2 bg-gradient-to-r from-green-300 via-white to-red-300'
             mode="horizontal"
             items={items}/>
