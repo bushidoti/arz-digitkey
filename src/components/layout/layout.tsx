@@ -10,11 +10,11 @@ const LayoutForm: React.FC = () => {
 
   return (
       <Layout>
-        <Content className='m-1 h-[85vh]'>
-            <div className='bg-gray-200 rounded-2xl min-h-[85vh] max-h-[85vh] overflow-auto' style={{padding: 24}}>
-                <RouteLayout/>
+          <Content className='m-1'>
+            <div className='bg-gray-100 rounded-2xl min-h-[100vh] overflow-auto !mb-[60px]'
+                 style={{padding: 24}}><RouteLayout/>
             </div>
-        </Content>
+          </Content>
           <MenuLayout/>
       </Layout>
   );

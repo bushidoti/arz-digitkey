@@ -100,10 +100,11 @@ export const MenuLayout = () => {
         getItem(<Link to='/metal'><GoldIcon/></Link>, '/metal'),
     ];
     return (
-        <Menu
+         <Menu
             theme={"dark"}
             defaultSelectedKeys={[window.location.pathname]}
-            className='bottom-0 fixed w-full justify-center rounded-t-[50px] gap-1 p-2 bg-gradient-to-r from-green-300 via-white to-red-300'
+            className='bottom-0 fixed w-full justify-center rounded-t-[50px] gap-1 p-2 !bg-blue-500 rounded-md
+            !bg-clip-padding !backdrop-filter !backdrop-blur-sm !bg-opacity-10'
             mode="horizontal"
             items={items}/>
     )

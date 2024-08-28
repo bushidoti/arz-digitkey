@@ -16,6 +16,8 @@ root.render(
            Menu: {
                 horizontalItemBorderRadius: 50,
                 iconSize: 50,
+                horizontalItemHoverBg: 'rgba(0,0,0,0.22)',
+                darkItemSelectedBg: 'rgba(22,119,255,0.49)',
             }
         }
     }}>
