@@ -214,14 +214,14 @@ export const Currency = () => {
                     style={{ width: 250 }}>
                         <Skeleton loading={loading} avatar active>
                           <Meta avatar={<Avatar className={`${Flag(value)} bg-center bg-cover`} />} title={CurrencyName(value)} key={i}/>
-                           <Space className='mt-5' direction="vertical" size={10} >
-                            <Meta className='font-bold' description={'نرخ روز ' + currency[value]?.p + ' ریال'}/>
-                            <Meta description={'بالاترین نرخ ' + currency[value]?.h + ' ریال'}/>
-                            <Meta description={'پایین ترین نرخ ' + currency[value]?.l + ' ریال'}/>
-                          </Space>
+                            <Space className='mt-5' direction="vertical" size={10}>
+                                <p className='font-bold'>{'نرخ روز ' + currency[value]?.p + ' ریال'}</p>
+                                <p>{'بالاترین نرخ ' + currency[value]?.h + ' ریال'}</p>
+                                <p>{'پایین ترین نرخ ' + currency[value]?.l + ' ریال'}</p>
+                            </Space>
                         </Skeleton>
                  </Card>
              ))}
-          </Flex>
+         </Flex>
     )
 }

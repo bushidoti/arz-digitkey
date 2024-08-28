@@ -1,13 +1,16 @@
 import {Avatar, Card, Flex, Skeleton, Space} from "antd";
 import {useEffect, useState} from "react";
 import axios from "axios";
-const { Meta } = Card;
 
 interface TypeSub {
     p:number
     h:number
     l:number
     dt:string
+}
+
+interface TypeMetalName {
+    [key: string] : string,
 }
 
 interface TypeContract {
@@ -33,7 +36,23 @@ export const Metal = () => {
         sekee : { p : 0, h : 0, l : 0,dt:''},
         gerami : { p : 0, h : 0, l : 0,dt:''},
     })
+
     const currenciesList = ['sekeb', 'nim', 'rob','mesghal','geram18','geram24','sekee','gerami']
+
+       const MetalName = (flag: string) => {
+      return metalNameList[flag]
+    }
+    
+   const metalNameList : TypeMetalName = {
+        'mesghal':'مثقال طلا',
+        'geram18':'طلای 18 عیار',
+        'geram24':'طلای 24 عیار',
+        'sekeb':'سکه بهار آزادی',
+        'nim':'نیم سکه بهار آزادی',
+        'rob':'ربع سکه بهار آزادی',
+        'sekee':'سکه امامی',
+        'gerami':'سکه گرمی',
+    }
 
     const fetchData = async () => {
         currenciesList.map(async (value) => {
@@ -45,6 +64,16 @@ export const Metal = () => {
         })
     }
 
+    const mIcon = (flag: string) => {
+        if (flag === 'mesghal' || flag === 'geram18' || flag === 'geram24'){
+            return "/assets/gold.png"
+        }else {
+            return  "/assets/coin.png"
+        }
+    }
+   const metalList = ['mesghal', 'geram18', 'geram24',
+        'sekeb','nim','rob','sekee','gerami']
+
     useEffect(() => {
             void fetchData()
             setInterval(fetchData, 250000)
@@ -54,126 +83,35 @@ export const Metal = () => {
 
     return (
          <Flex className='justify-center' wrap="wrap" gap="small">
-              <Card
-                hoverable
-                loading={loading}
-                className={currency.mesghal.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                 <Skeleton loading={loading} avatar active>
-                       <Meta avatar={<Avatar className='bg-gold bg-cover bg-center' />} title='مثقال طلا'/>
-                       <Space className='mt-5' direction="vertical" size={10} >
-                            <Meta className='font-bold' description={'نرخ روز ' + currency.mesghal.p + ' ریال'}/>
-                            <Meta description={'بالاترین نرخ ' + currency.mesghal.h + ' ریال'}/>
-                            <Meta description={'پایین ترین نرخ ' + currency.mesghal.l + ' ریال'}/>
-                       </Space>
-                 </Skeleton>
-             </Card>
-             <Card
-                 loading={loading}
-                hoverable
-                className={currency.geram18.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-               <Skeleton loading={loading} avatar active>
-                  <Meta avatar={<Avatar className='bg-gold bg-cover bg-center' />} title='طلای 18 عیار'/>
-                       <Space className='mt-5' direction="vertical" size={10} >
-                        <Meta className='font-bold' description={'نرخ روز ' + currency.geram18.p + ' ریال'}/>
-                        <Meta description={'بالاترین نرخ ' + currency.geram18.h + ' ریال'}/>
-                        <Meta description={'پایین ترین نرخ ' + currency.geram18.l + ' ریال'}/>
-                      </Space>
-               </Skeleton>
-              </Card>
-             <Card
-                 loading={loading}
-                hoverable
-                className={currency.geram24.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                  <Skeleton loading={loading} avatar active>
-                      <Meta avatar={<Avatar className='bg-gold bg-cover bg-center' />} title='طلای 24 عیار'/>
-                       <Space className='mt-5' direction="vertical" size={10} >
-                        <Meta className='font-bold' description={'نرخ روز ' + currency.geram24.p + ' ریال'}/>
-                        <Meta description={'بالاترین نرخ ' + currency.geram24.h + ' ریال'}/>
-                        <Meta description={'پایین ترین نرخ ' + currency.geram24.l + ' ریال'}/>
-                      </Space>
-                  </Skeleton>
-              </Card>
-              <Card
-                loading={loading}
-                hoverable
-                className={currency.sekeb.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                <Skeleton loading={loading} avatar active>
-                  <Meta avatar={<Avatar className='bg-coin bg-cover bg-center' />} title='سکه بهار آزادی'/>
-                  <Space className='mt-5' direction="vertical" size={10} >
-                    <Meta description={'نرخ روز ' + currency.sekeb.p + ' ریال'}/>
-                    <Meta description={'بالاترین نرخ ' + currency.sekeb.h + ' ریال'}/>
-                    <Meta description={'پایین ترین نرخ ' + currency.sekeb.l + ' ریال'}/>
-                  </Space>
-                </Skeleton>
-              </Card>
-             <Card
-                loading={loading}
-                hoverable
-                className={currency.nim.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                <Skeleton loading={loading} avatar active>
-                    <Meta avatar={<Avatar className='bg-coin bg-cover' />} title='نیم سکه بهار آزادی'/>
-                    <Space className='mt-5' direction="vertical" size={10} >
-                        <Meta description={<p>نرخ روز   {currency.nim.p}   ریال</p>}/>
-                        <Meta description={'بالاترین نرخ ' + currency.nim.h + ' ریال'}/>
-                        <Meta description={'پایین ترین نرخ ' + currency.nim.l + ' ریال'}/>
-                    </Space>
-                </Skeleton>
-              </Card>
-              <Card
-                loading={loading}
-                hoverable
-                className={currency.rob.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                <Skeleton loading={loading} avatar active>
-                <Meta avatar={<Avatar className='bg-coin bg-cover bg-center' />} title='ربع سکه بهار آزادی'/>
-                  <Space className='mt-5' direction="vertical" size={10} >
-                    <Meta description={'نرخ روز ' + currency.rob.p + ' ریال'}/>
-                    <Meta description={'بالاترین نرخ ' + currency.rob.h + ' ریال'}/>
-                    <Meta description={'پایین ترین نرخ ' + currency.rob.l + ' ریال'}/>
-                  </Space>
-                </Skeleton>
-              </Card>
-             <Card
-                loading={loading}
-                hoverable
-                className={currency.sekee.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                <Skeleton loading={loading} avatar active>
-                <Meta avatar={<Avatar className='bg-coin bg-cover bg-center' />} title='سکه امامی'/>
-                  <Space className='mt-5' direction="vertical" size={10} >
-                    <Meta description={'نرخ روز ' + currency.sekee.p + ' ریال'}/>
-                    <Meta description={'بالاترین نرخ ' + currency.sekee.h + ' ریال'}/>
-                    <Meta description={'پایین ترین نرخ ' + currency.sekee.l + ' ریال'}/>
-                  </Space>
-                </Skeleton>
-              </Card>
-             <Card
-                loading={loading}
-                hoverable
-                className={currency.gerami.dt === 'high' ? 'bg-green-200' : 'bg-red-200'}
-                style={{ width: 250 }}
-              >
-                <Skeleton loading={loading} avatar active>
-                <Meta avatar={<Avatar className='bg-coin bg-cover bg-center' />} title='سکه گرمی'/>
-                  <Space className='mt-5' direction="vertical" size={10} >
-                    <Meta description={'نرخ روز ' + currency.gerami.p + ' ریال'}/>
-                    <Meta description={'بالاترین نرخ ' + currency.gerami.h + ' ریال'}/>
-                    <Meta description={'پایین ترین نرخ ' + currency.gerami.l + ' ریال'}/>
-                  </Space>
-                </Skeleton>
-              </Card>
+             {metalList.map((value : string, i) => (
+                    <Card
+                        key={i}
+                        hoverable
+
+                            // @ts-ignore
+                        className={currency[value]?.dt === 'high' ? '!bg-green-200' : '!bg-red-200'}
+                        style={{width: 250}}>
+                                         <Skeleton loading={loading} avatar active>
+
+
+                            <Flex gap={10} align={"center"}>
+                                <Avatar src={mIcon(value)!} className='bg-gold bg-cover bg-center' />
+                                <h2 className='font-bold'  key={`h2${i}`}>{MetalName(value)}</h2>
+                            </Flex>
+                        <Space className='mt-5' direction="vertical" size={10}>
+                            <p className='font-bold'>{'نرخ روز ' +
+                                // @ts-ignore
+                                currency[value]?.p + ' ریال'}</p>
+                            <p>{'بالاترین نرخ ' +
+                                // @ts-ignore
+                                currency[value]?.h + ' ریال'}</p>
+                            <p>{'پایین ترین نرخ ' +
+                                // @ts-ignore
+                                currency[value]?.l + ' ریال'}</p>
+                        </Space>
+                      </Skeleton>
+                    </Card>
+                ))}
           </Flex>
     )
 }
